@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriGuard | Spotted Lanternfly Solutions</title>
+  <meta
+    name="description"
+    content="AgriGuard provides modern invasive species monitoring, maintenance, and eradication solutions focused on spotted lanternfly threats for private properties, agriculture, and government partnerships."
+  />
+  <style>
+    :root {
+      --bg: #0f1720;
+      --bg2: #16212c;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f3f7fa;
+      --muted: #b6c2cc;
+      --green: #4ade80;
+      --green-dark: #1f7a45;
+      --accent: #8b5cf6;
+      --danger: #ef4444;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      --radius: 20px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(74, 222, 128, 0.10), transparent 35%),
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 35%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), #22c55e);
+      color: #092312;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.18);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 16, 23, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--green), var(--accent));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      padding: 80px 0 50px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(74, 222, 128, 0.10);
+      color: var(--green);
+      border: 1px solid rgba(74, 222, 128, 0.18);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 700px;
+      font-size: 1.06rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .stat h3 {
+      font-size: 1.4rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .stat p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #1e2936;
+    }
+
+    .hero-card-content {
+      padding: 20px;
+    }
+
+    .hero-card-content h3 {
+      margin-bottom: 8px;
+    }
+
+    .hero-card-content p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 42px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.25), rgba(139, 92, 246, 0.22));
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      font-size: 1.3rem;
+    }
+
+    .image-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      background: #1d2833;
+    }
+
+    .checklist {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .checklist li {
+      color: var(--muted);
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      padding: 22px;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--green), var(--accent));
+      margin-bottom: 14px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 36px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(139, 92, 246, 0.14));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 14px auto 24px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 0 50px;
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.86rem;
+      color: #d0dae3;
+      background: rgba(255,255,255,0.08);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-badge">AG</span>
+        <span>AgriGuard</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Modern Invasive Species Response</span>
+          <h1>Protecting Properties, Agriculture, and Communities from Spotted Lanternfly Threats</h1>
+          <p>
+            AgriGuard is being built to deliver modern spotted lanternfly monitoring, maintenance,
+            containment, and eradication support for private properties, commercial sites, agricultural
+            operations, and future government partnerships.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Request Consultation</a>
+            <a href="#services" class="btn btn-secondary">Explore Services</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <h3>Private</h3>
+              <p>Residential and commercial protection plans</p>
+            </div>
+            <div class="stat">
+              <h3>Public</h3>
+              <p>Built with future municipal and government work in mind</p>
+            </div>
+            <div class="stat">
+              <h3>Modern</h3>
+              <p>Education, response strategy, and scalable service rollout</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img src="hero-lanternfly-team.jpg" alt="AgriGuard field response team placeholder image" />
+          <div class="hero-card-content">
+            <h3>Field-Ready Protection</h3>
+            <p>
+              Placeholder hero image for later: team, landscape, lanternfly threat visuals,
+              or a high-end pest control style brand image.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Core Service Areas</h2>
+        <p class="section-subtitle">
+          AgriGuard is structured around prevention, monitoring, rapid response, and long-term maintenance
+          strategies for spotted lanternfly pressure across public and private environments.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="service-icon">🛰️</div>
+            <h3>Inspection & Monitoring</h3>
+            <p>
+              Site reviews, risk checks, visual monitoring, hotspot identification, and recurring
+              surveillance plans for properties and facilities.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="service-icon">🛡️</div>
+            <h3>Containment & Maintenance</h3>
+            <p>
+              Ongoing property maintenance strategies to reduce spread, support control efforts,
+              and help clients stay ahead of future infestation cycles.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="service-icon">🌿</div>
+            <h3>Private & Government Solutions</h3>
+            <p>
+              Flexible service pathways being designed for homeowners, farms, businesses,
+              municipalities, and future contract-based response work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container grid-2">
+        <div class="card image-card">
+          <img src="about-lanternfly-infestation-map.jpg" alt="Spotted lanternfly infestation or landscape placeholder image" />
+        </div>
+
+        <div class="card">
+          <h2>Built in the Early Phase. Designed for Serious Scale.</h2>
+          <p>
+            AgriGuard is currently in its early build phase, with a focus on creating a strong, modern,
+            trustworthy brand capable of serving both private clients and larger public-sector opportunities.
+          </p>
+
+          <ul class="checklist">
+            <li>Mobile-friendly digital presence from day one</li>
+            <li>Service structure for residential, commercial, and agricultural needs</li>
+            <li>Future-ready positioning for bids, partnerships, and contract growth</li>
+            <li>Modern branding and education-based public trust strategy</li>
+          </ul>
+
+          <span class="tag">AgriGuard • Invasive Species Defense</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Why AgriGuard</h2>
+        <p class="section-subtitle">
+          The goal is not just reacting to infestations, but building a professional response system
+          around awareness, prevention, and sustained control.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Professional Image</h3>
+            <p>
+              A clean, serious, modern front that helps establish credibility with private clients,
+              partners, and future public-sector opportunities.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Scalable Direction</h3>
+            <p>
+              Structured to start small while leaving room to grow into larger service zones,
+              recurring service contracts, and operational expansion.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Focused Mission</h3>
+            <p>
+              A specialized approach centered on the spotted lanternfly threat and the need for
+              direct action, education, and long-term maintenance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">
+          A straightforward process for future clients, property owners, and contract opportunities.
+        </p>
+
+        <div class="process">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Inquiry</h3>
+            <p>Client or agency reaches out with property details, infestation concerns, or service interest.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Assessment</h3>
+            <p>Initial site review, threat evaluation, and identification of pressure areas or treatment needs.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Strategy</h3>
+            <p>A practical service plan is proposed based on site size, urgency, and recurring maintenance needs.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Ongoing Support</h3>
+            <p>Follow-up service, monitoring, seasonal maintenance, and long-term prevention planning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <h2>Building Now. Preparing for Impact.</h2>
+          <p>
+            AgriGuard is currently being developed. If you are interested in future private service,
+            commercial support, agricultural protection, or public-sector partnership opportunities,
+            this is where the next phase begins.
+          </p>
+          <a href="mailto:info@agriguard.com" class="btn btn-primary">Contact AgriGuard</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>AgriGuard</strong><br />
+        Spotted Lanternfly Solutions
+      </div>
+      <div>
+        Early-stage brand build • Mobile-friendly site • Future-focused operations
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
